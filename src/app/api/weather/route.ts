@@ -3,7 +3,7 @@ export async function GET(req: Request) {
   const city = searchParams.get("city");
 
   if (!city) {
-    return new Response(JSON.stringify({ error: "City is required" }), {
+    return new Response(JSON.stringify({ error: "City is required." }), {
       status: 400,
     });
   }
@@ -15,16 +15,24 @@ export async function GET(req: Request) {
     );
 
     if (!response.ok) {
-      return new Response(JSON.stringify({ error: "City not found" }), {
-        status: 404,
-      });
+      if (response.status === 404) {
+        return new Response(JSON.stringify({ error: "City not found." }), {
+          status: 404,
+        });
+      }
+      return new Response(
+        JSON.stringify({ error: "Weather service unavailable." }),
+        {
+          status: response.status,
+        }
+      );
     }
 
     const data = await response.json();
     return new Response(JSON.stringify(data));
   } catch (error) {
-    console.log("An error ocurred: ", error);
-    return new Response(JSON.stringify({ error: "Failed to fetch weather" }), {
+    console.error("API Error:", error);
+    return new Response(JSON.stringify({ error: "Failed to fetch weather." }), {
       status: 500,
     });
   }

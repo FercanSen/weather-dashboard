@@ -22,9 +22,11 @@ export default function Home() {
       <Header onSearch={handleSearch} />
       {isLoading && <p className="text-center mt-4">Loading...</p>}
       {error && (
-        <p className="text-red-500 text-center mt-4">
-          Failed to fetch weather.
-        </p>
+        <EmptyComp
+          message="Failed to fetch weather."
+          isError
+          className="text-red-500 text-center mt-4"
+        />
       )}
       <div className="flex items-center justify-center min-h-screen bg-background">
         {!queryCity ? (

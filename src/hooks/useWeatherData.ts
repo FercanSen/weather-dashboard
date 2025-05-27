@@ -9,9 +9,15 @@ export const useWeatherData = (
     queryKey: ["weather", queryCity, unit],
     queryFn: async () => {
       const res = await fetch(`/api/weather?city=${queryCity}&unit=${unit}`);
-      if (!res.ok) throw new Error("City not found or API error");
-      return res.json();
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Unknown error occurred");
+      }
+
+      return data;
     },
     enabled: !!queryCity,
+    retry: 1,
   });
 };
