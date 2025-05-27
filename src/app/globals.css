@@ -17,6 +17,10 @@
   --accent: #3b82f6;
   --accent-light: #93c5fd;
   --accent-dark: #2563eb;
+
+  --destructive: #ef4444;
+  --destructive-light: #fca5a5;
+  --destructive-dark: #b91c1c;
 }
 
 body {

@@ -23,6 +23,10 @@ export default {
         accent: "var(--accent)",
         accentLight: "var(--accent-light)",
         accentDark: "var(--accent-dark)",
+
+        destructive: "var(--destructive)",
+        destructiveLight: "var(--destructive-light)",
+        destructiveDark: "var(--destructive-dark)",
       },
     },
   },
