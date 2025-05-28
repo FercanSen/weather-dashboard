@@ -7,11 +7,8 @@ import { CloudSun } from "lucide-react";
 import SearchBar from "./SearchBar";
 import Switch from "./Switch";
 
-interface HeaderProps {
-  onSearch: () => void;
-}
 
-export default function Header({ onSearch }: HeaderProps) {
+export default function Header() {
   const { city, setCity, isMetric, toggleUnit } = useWeatherStore();
 
   return (
@@ -21,7 +18,7 @@ export default function Header({ onSearch }: HeaderProps) {
         Weather Dashboard
       </h1>
 
-      <SearchBar city={city} setCity={setCity} onSearch={onSearch} />
+      <SearchBar city={city} setCity={setCity} />
 
       <Switch
         isOn={isMetric}

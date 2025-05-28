@@ -7,19 +7,14 @@ import WeatherCard from "@/components/WeatherCard";
 import EmptyComp from "@/components/EmptyComp";
 
 export default function Home() {
-  const { city, queryCity, setQueryCity, isMetric } = useWeatherStore();
+  const { queryCity, isMetric } = useWeatherStore();
   const unit = isMetric ? "metric" : "imperial";
-
-  const handleSearch = () => {
-    const trimmed = city.trim();
-    if (trimmed) setQueryCity(trimmed);
-  };
 
   const { data, isLoading, error } = useWeatherData(queryCity, unit);
 
   return (
-    <main>
-      <Header onSearch={handleSearch} />
+    <main className="min-h-screen flex flex-col">
+      <Header />
       {isLoading && <p className="text-center mt-4">Loading...</p>}
       {error && (
         <EmptyComp
@@ -28,7 +23,7 @@ export default function Home() {
           className="text-red-500 text-center mt-4"
         />
       )}
-      <div className="flex items-center justify-center min-h-screen bg-background">
+      <div className="flex justify-center px-4 py-6">
         {!queryCity ? (
           <EmptyComp message="Search for a city to view the weather." />
         ) : (
