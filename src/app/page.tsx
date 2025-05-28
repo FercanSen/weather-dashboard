@@ -13,17 +13,18 @@ export default function Home() {
   const { data, isLoading, error } = useWeatherData(queryCity, unit);
 
   return (
-    <main className="min-h-screen flex flex-col">
+    <main className="flex flex-col min-h-screen">
       <Header />
-      {isLoading && <p className="text-center mt-4">Loading...</p>}
-      {error && (
-        <EmptyComp
-          message="Failed to fetch weather."
-          isError
-          className="text-red-500 text-center mt-4"
-        />
-      )}
-      <div className="flex justify-center px-4 py-6">
+      {isLoading && <p className="text-center text-black mt-4">Loading...</p>}
+
+      <div className="flex flex-1 justify-center items-center px-4 py-6">
+        {error && (
+          <EmptyComp
+            message="Failed to fetch weather."
+            isError
+            className="text-destructive text-center mt-4"
+          />
+        )}
         {!queryCity ? (
           <EmptyComp message="Search for a city to view the weather." />
         ) : (

@@ -19,7 +19,7 @@ export default function EmptyComp({
   return (
     <div
       className={classNames(
-        "flex items-center justify-center gap-2 min-h-screen text-lg",
+        "flex items-center justify-center gap-2 text-lg",
         isError ? "text-destructive" : "text-accentLight",
         className
       )}

@@ -13,7 +13,7 @@ export default function WeatherCard({ data, isMetric }: WeatherCardProps) {
   const unitSymbol = isMetric ? "C" : "F";
   const WeatherIcon = getWeatherIcon(data.weather[0].description);
   return (
-    <div className="bg-white text-black shadow-xl rounded-lg w-1/4  p-4 space-y-3">
+    <div className="bg-white text-black shadow-xl rounded-lg lg:w-1/4 h-auto p-4 space-y-3">
       <h2 className="text-xl font-semibold">
         {data.name}, {data.sys?.country}
       </h2>

@@ -20,7 +20,7 @@ export default function Switch({
       onClick={onToggle}
       role="switch"
       aria-checked={isOn}
-      className={`relative inline-flex items-center h-8 w-20 rounded-full px-1 transition-colors duration-300 ${
+      className={`relative inline-flex items-center flex-shrink-0 h-8 w-[80px] rounded-full px-1 transition-colors duration-300 ${
         isOn ? "bg-primary" : "bg-gray-300"
       }`}
     >

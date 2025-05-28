@@ -59,15 +59,15 @@ export default function SearchBar({ city, setCity }: SearchBarProps) {
   }, []);
 
   return (
-    <div className="relative flex-1 min-w-0" ref={ref}>
+    <div className="w-full md:w-1/2 px-3" ref={ref}>
       <div className="flex items-center gap-2">
         <input
           value={city}
           onChange={(e) => setCity(e.target.value)}
           placeholder="Enter city"
-          className="h-10 w-1/2 px-3 border rounded-md text-black focus:outline-none focus:ring-2 focus:ring-primary"
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
+          className="flex-1 h-10 px-3 border rounded-md text-black focus:outline-none focus:ring-1 focus:ring-primary"
         />
         <button
           onClick={() => {
