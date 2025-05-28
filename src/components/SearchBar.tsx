@@ -59,7 +59,7 @@ export default function SearchBar({ city, setCity }: SearchBarProps) {
   }, []);
 
   return (
-    <div className="w-full md:w-1/2 px-3" ref={ref}>
+    <div className="w-full md:w-1/2 px-3 transition-all duration-500 ease-in-out" ref={ref}>
       <div className="flex items-center gap-2">
         <input
           value={city}

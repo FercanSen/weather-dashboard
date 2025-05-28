@@ -25,7 +25,7 @@ export default function Switch({
       }`}
     >
       <span
-        className={`absolute left-5 text-xs font-semibold text-black z-10 select-none pointer-events-none transition-opacity duration-200 ${
+        className={`absolute left-5 text-xs font-semibold text-black z-10 select-none pointer-events-none transition-opacity duration-200 ease-in-out ${
           isOn ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -33,7 +33,7 @@ export default function Switch({
       </span>
 
       <span
-        className={`absolute right-5 text-xs font-semibold text-black z-10 select-none pointer-events-none transition-opacity duration-200 ${
+        className={`absolute right-5 text-xs font-semibold text-black z-10 select-none pointer-events-none transition-opacity duration-200 ease-in-out ${
           !isOn ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -42,7 +42,7 @@ export default function Switch({
 
       {/* Knob */}
       <span
-        className={`absolute left-1 top-1 w-6 h-6 bg-white rounded-full shadow-md transform transition-transform duration-300 ease-in-out ${
+        className={`absolute left-1 top-1 w-6 h-6 bg-white rounded-full shadow-md transform transition-transform duration-300 ease-in-out will-change-transform ${
           isOn ? "translate-x-12" : "translate-x-0"
         }`}
       />
