@@ -6,11 +6,14 @@ interface WeatherState {
   setQueryCity: (queryCity: string) => void;
   isMetric: boolean;
   toggleUnit: () => void;
+  setIsMetric: (value: boolean) => void;
   history: string[];
   addToHistory: (city: string) => void;
   setHistory: (history: string[]) => void;
   removeFromHistory: (city: string) => void;
   clearHistory: () => void;
+  hasHydrated: boolean;
+  setHasHydrated: (value: boolean) => void;
 }
 
 export const useWeatherStore = create<WeatherState>((set) => ({
@@ -19,7 +22,18 @@ export const useWeatherStore = create<WeatherState>((set) => ({
   queryCity: "",
   setQueryCity: (queryCity) => set({ queryCity }),
   isMetric: true,
-  toggleUnit: () => set((state) => ({ isMetric: !state.isMetric })),
+  setIsMetric: (value) => {
+    localStorage.setItem("isMetric", value.toString());
+    set({ isMetric: value });
+  },
+  toggleUnit: () =>
+    set((state) => {
+      const newValue = !state.isMetric;
+      localStorage.setItem("isMetric", newValue.toString());
+      return { isMetric: newValue };
+    }),
+  hasHydrated: false,
+  setHasHydrated: (value) => set({ hasHydrated: value }),
   history: [],
   setHistory: (history) => set({ history }),
   addToHistory: (city) =>

@@ -1,6 +1,7 @@
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const city = searchParams.get("city");
+  const unit = searchParams.get("unit") || "metric";
 
   if (!city) {
     return new Response(JSON.stringify({ error: "City is required." }), {
@@ -11,7 +12,7 @@ export async function GET(req: Request) {
   try {
     const apiKey = process.env.WEATHER_API_KEY;
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${unit}`
     );
 
     if (!response.ok) {
