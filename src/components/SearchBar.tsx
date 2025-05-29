@@ -59,16 +59,31 @@ export default function SearchBar({ city, setCity }: SearchBarProps) {
   }, []);
 
   return (
-    <div className="w-full md:w-1/2 px-3 transition-all duration-500 ease-in-out" ref={ref}>
+    <div
+      className="w-full md:w-1/2 px-3 transition-all duration-500 ease-in-out"
+      ref={ref}
+    >
       <div className="flex items-center gap-2">
-        <input
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          placeholder="Enter city"
-          onFocus={() => setIsOpen(true)}
-          onKeyDown={handleKeyDown}
-          className="flex-1 h-10 px-3 border rounded-md text-black focus:outline-none focus:ring-1 focus:ring-primary"
-        />
+        <div className="relative flex-1">
+          <input
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            placeholder="Enter city"
+            onFocus={() => setIsOpen(true)}
+            onKeyDown={handleKeyDown}
+            className="w-full h-10 px-3 border rounded-md text-black focus:outline-none focus:ring-1 focus:ring-primary"
+          />
+
+          {isOpen && history.length > 0 && (
+            <HistoryDropdown
+              history={history}
+              onSelect={handleHistoryClick}
+              onClear={handleClear}
+              onRemove={removeFromHistory}
+            />
+          )}
+        </div>
+
         <button
           onClick={() => {
             handleSearch(city);
@@ -79,15 +94,6 @@ export default function SearchBar({ city, setCity }: SearchBarProps) {
           Search
         </button>
       </div>
-
-      {isOpen && history.length > 0 && (
-        <HistoryDropdown
-          history={history}
-          onSelect={handleHistoryClick}
-          onClear={handleClear}
-          onRemove={removeFromHistory}
-        />
-      )}
     </div>
   );
 }
