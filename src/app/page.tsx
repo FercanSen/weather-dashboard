@@ -3,9 +3,19 @@
 import { useWeatherStore } from "@/store/useWeatherStore";
 import { useWeatherData } from "@/hooks/useWeatherData";
 import Header from "@/components/Header";
-import WeatherCard from "@/components/WeatherCard";
-import EmptyComp from "@/components/EmptyComp";
 import LoadingSpinner from "@/components/LoadingSpinner";
+
+import dynamic from "next/dynamic";
+
+const WeatherCard = dynamic(() => import("@/components/WeatherCard"), {
+  loading: () => <LoadingSpinner />,
+  ssr: false,
+});
+
+const EmptyComp = dynamic(() => import("@/components/EmptyComp"), {
+  loading: () => <LoadingSpinner />,
+  ssr: false,
+});
 
 export default function Home() {
   const { queryCity, isMetric } = useWeatherStore();
