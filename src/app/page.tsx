@@ -1,16 +1,14 @@
 "use client";
 
 import { useWeatherStore } from "@/store/useWeatherStore";
-import { useWeatherData } from "@/hooks/useWeatherData";
 import Header from "@/components/Header";
 import LoadingSpinner from "@/components/LoadingSpinner";
 
 import dynamic from "next/dynamic";
-
-const WeatherCard = dynamic(() => import("@/components/WeatherCard"), {
-  loading: () => <LoadingSpinner />,
-  ssr: false,
-});
+import { useForecastData } from "@/hooks/useForecastData";
+import ForecastCard from "@/components/ForecastCard";
+import WeatherCard from "@/components/WeatherCard";
+import { useWeatherData } from "@/hooks/useWeatherData";
 
 const EmptyComp = dynamic(() => import("@/components/EmptyComp"), {
   loading: () => <LoadingSpinner />,
@@ -22,6 +20,11 @@ export default function Home() {
   const unit = isMetric ? "metric" : "imperial";
 
   const { data, isLoading, error } = useWeatherData(queryCity, unit);
+  const {
+    data: forecast,
+    isLoading: isForecastLoading,
+    error: forecastError,
+  } = useForecastData(queryCity, unit);
 
   return (
     <main className="flex flex-col min-h-screen">
@@ -39,7 +42,37 @@ export default function Home() {
         ) : !queryCity ? (
           <EmptyComp message="Search for a city to view the weather." />
         ) : (
-          data && <WeatherCard data={data} isMetric={isMetric} />
+          data && (
+            <div className="flex flex-col gap-6 w-full items-center">
+              <WeatherCard data={data} isMetric={isMetric} />
+
+              {isForecastLoading ? (
+                <LoadingSpinner />
+              ) : forecastError ? (
+                <EmptyComp
+                  message="Failed to load forecast."
+                  isError
+                  className="text-destructive"
+                />
+              ) : (
+                forecast && (
+                  <div className="text-black">
+                    5 day weather forecast
+                    <hr className="border-t my-2 border-gray-300" />
+                    <div className="flex flex-wrap gap-4 justify-center">
+                      {forecast.map((item) => (
+                        <ForecastCard
+                          key={item.dt}
+                          item={item}
+                          isMetric={isMetric}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )
+              )}
+            </div>
+          )
         )}
       </div>
     </main>

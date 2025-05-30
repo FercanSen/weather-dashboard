@@ -10,7 +10,7 @@ interface WeatherCardProps {
 }
 
 export default function WeatherCard({ data, isMetric }: WeatherCardProps) {
-  const unitSymbol = isMetric ? "C" : "F";
+  const unit = isMetric ? "°C" : "°F";
   const WeatherIcon = getWeatherIcon(data.weather[0].description);
   return (
     <div className="bg-white text-black shadow-xl rounded-lg lg:w-1/4 h-auto p-4 space-y-3 ">
@@ -31,7 +31,8 @@ export default function WeatherCard({ data, isMetric }: WeatherCardProps) {
         <div className="flex items-center gap-2">
           <Icon icon={Thermometer} size={IconSize.LG} />
           <span>
-            Temp: {data.main.temp}°{unitSymbol}
+            Temp: {data.main.temp}
+            {unit}
           </span>
         </div>
 
@@ -42,7 +43,9 @@ export default function WeatherCard({ data, isMetric }: WeatherCardProps) {
 
         <div className="flex items-center gap-2">
           <Icon icon={Wind} size={IconSize.LG} />
-          <span>Wind: {data.wind.speed} {isMetric ? "m/s" : "mph"}</span>
+          <span>
+            Wind: {data.wind.speed} {isMetric ? "m/s" : "mph"}
+          </span>
         </div>
       </div>
     </div>
