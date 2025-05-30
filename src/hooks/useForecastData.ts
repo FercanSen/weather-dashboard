@@ -7,5 +7,6 @@ export function useForecastData(city: string, unit: string) {
     queryFn: () => getFiveDayForecast(city, unit),
     enabled: !!city,
     staleTime: 1000 * 60 * 10, // 10 minutes
+    retry: 1,
   });
 }

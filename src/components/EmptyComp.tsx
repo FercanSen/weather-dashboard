@@ -6,7 +6,7 @@ import { Search, SearchX } from "lucide-react";
 import classNames from "classnames";
 
 interface EmptyCompProps {
-  message: string;
+  message: string | string[];
   isError?: boolean;
   className?: string;
 }
@@ -29,7 +29,11 @@ export default function EmptyComp({
       ) : (
         <Icon icon={Search} size={IconSize.XXL} />
       )}
-      {message}
+      {Array.isArray(message) ? (
+        message.map((msg, index) => <p key={index}>{msg}</p>)
+      ) : (
+        <p>{message}</p>
+      )}
     </div>
   );
 }

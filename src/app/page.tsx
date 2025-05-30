@@ -26,6 +26,10 @@ export default function Home() {
     error: forecastError,
   } = useForecastData(queryCity, unit);
 
+  const fetchError = [error?.message, forecastError?.message].filter(
+    Boolean
+  ) as string[];
+
   return (
     <main className="flex flex-col min-h-screen">
       <Header />
@@ -35,7 +39,7 @@ export default function Home() {
           <LoadingSpinner />
         ) : error ? (
           <EmptyComp
-            message="Failed to fetch weather."
+            message={fetchError}
             isError
             className="text-destructive text-center mt-4"
           />
