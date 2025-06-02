@@ -34,7 +34,7 @@ A sleek and responsive weather dashboard built with **Next.js 14**, **TypeScript
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/weather-dashboard.git
+git clone https://github.com/FercanSen/weather-dashboard.git
 cd weather-dashboard
 ```
 
